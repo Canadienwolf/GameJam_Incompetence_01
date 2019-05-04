@@ -92,7 +92,7 @@ public class VehicleAI : MonoBehaviour
         isRotating = true;
 
         var side = isRight ? 1 : -1;
-        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side * 90f, transform.rotation.z);
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side + 90f, transform.rotation.z);
 
         while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
@@ -112,7 +112,7 @@ public class VehicleAI : MonoBehaviour
         isRotating = true;
 
         var side = isRight ? 1 : -1;
-        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side * -90f, transform.rotation.z);
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side - 90f, transform.rotation.z);
 
         while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
