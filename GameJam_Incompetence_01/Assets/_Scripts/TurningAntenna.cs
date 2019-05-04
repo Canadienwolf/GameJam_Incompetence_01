@@ -6,6 +6,6 @@ public class TurningAntenna : MonoBehaviour
 {
     void FixedUpdate()
     {
-        transform.Rotate(Vector3.up * Time.deltaTime * 100);
+        transform.Rotate(Vector3.up * Time.deltaTime * 300);
     }
 }
