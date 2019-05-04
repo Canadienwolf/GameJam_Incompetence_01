@@ -34,4 +34,12 @@ public class PlayerController : MonoBehaviour
             transform.Rotate(Vector3.up * currentRot);
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (currentSpeed > maxSpeed/1.1f)
+        {
+            print("You die");
+        }
+    }
 }
