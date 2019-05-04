@@ -16,6 +16,11 @@ public class VehicleAI : MonoBehaviour
     //the current rotation in the y axis that the vehicle currently has in the Y axis
     public float currentRot;
 
+    //The speed that the vehicle can turn at
+    public float rotSpeed;
+
+    private bool isRotating;
+
     private void Start()
     {
         
@@ -29,9 +34,31 @@ public class VehicleAI : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         Debug.Log(other.tag);
-        if (other.tag == "TrafficBox_1")
+        if (other.CompareTag( "TrafficBox_1"))
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.y, currentRot + 90, yRot);
+            print(1);
+            StartCoroutine(SmoothRotate(true));
+
         }
+    }
+
+    private IEnumerator SmoothRotate(bool isRight)
+    {
+        if(isRotating)
+            yield return null;
+
+        isRotating = true;
+
+        var side = isRight ? 1 : -1;
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side*90f, transform.rotation.z);
+
+        while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotSpeed);
+            yield return new WaitForEndOfFrame();
+        }
+
+        isRotating = false;
+
     }
 }
