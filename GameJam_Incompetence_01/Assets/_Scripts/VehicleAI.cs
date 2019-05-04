@@ -4,57 +4,61 @@ using UnityEngine;
 
 public class VehicleAI : MonoBehaviour
 {
+    //Speed of the vehicle
+    private float speed = 5f;
 
-    public float movementSpeed = 0.5f;
+    //3 choices of which if statement to take, so that it knows how many directions it can go
+    private int turnDirection;
 
+    //rotation value in the Y axis
+    private float yRot;
 
-    private float currentRot;
-    public float yRot;
-    public int turnDirection = 3;
+    //the current rotation in the y axis that the vehicle currently has in the Y axis
+    public float currentRot;
 
+    //The speed that the vehicle can turn at
+    public float rotSpeed;
 
+    private bool isRotating;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
-        currentRot = transform.rotation.y;
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+    }
 
-        if (turnDirection == 1)
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log(other.tag);
+        if (other.CompareTag( "TrafficBox_1"))
         {
-            yRot += Time.deltaTime * movementSpeed;
-            transform.rotation = Quaternion.Euler(0, Mathf.MoveTowards(transform.rotation.y, currentRot + 90, yRot), 0);
-        }
-        else if (turnDirection == 0)
-        {
-            yRot += Time.deltaTime * movementSpeed;
-            transform.rotation = Quaternion.Euler(0, Mathf.MoveTowards(transform.rotation.y, currentRot - 90, yRot), 0);
+            print(1);
+            StartCoroutine(SmoothRotate(true));
+
         }
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private IEnumerator SmoothRotate(bool isRight)
     {
-        if (collider.gameObject.tag == "TrafficBox")
+        if(isRotating)
+            yield return null;
+
+        isRotating = true;
+
+        var side = isRight ? 1 : -1;
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side*90f, transform.rotation.z);
+
+        while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
-            //transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotSpeed);
+            yield return new WaitForEndOfFrame();
         }
 
-        if (collider.gameObject.tag == "Right/Left_Turn")
-        {
-            turnDirection = Random.Range(0, 2);
-            
-        }
-
-        if (GameObject.FindGameObjectWithTag(""))
-        {
-            
-        }
+        isRotating = false;
 
     }
 }
