@@ -13,11 +13,26 @@ public class PlayerController : MonoBehaviour
     public float lives = 100;
     public float bloodLeft = 100;
     public GameObject blood;
+    public GameObject hospitalPointer;
+
 
     private float currentSpeed;
     private float speedInput;
     [HideInInspector] public float currentRot;
+    private GameObject[] hospitals;
+    private List<GameObject> pointers = new List<GameObject>();
 
+    private void Start()
+    {
+        hospitals = GameObject.FindGameObjectsWithTag("Hospital");
+
+        for (int i = 0; i < hospitals.Length; i++)
+        {
+            pointers.Add(Instantiate(hospitalPointer, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity));
+            pointers[i].transform.parent = gameObject.transform;
+            pointers[i].GetComponent<FaceTowards>().hospitalTarget = hospitals[i];
+        }
+    }
 
     void Update()
     {
@@ -27,11 +42,6 @@ public class PlayerController : MonoBehaviour
         {
             print("you lose");
         }
-    }
-
-    void FixedUpdate()
-    {
-        
     }
 
     void LateUpdate()
