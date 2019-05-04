@@ -10,6 +10,8 @@ TagManager:
   - TrafficBox_1
   - TrafficBox_2
   - TrafficBox_3
+  - TrafficBox_4
+  - TrafficBox_5
   layers:
   - Default
   - TransparentFX

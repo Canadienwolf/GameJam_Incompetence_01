@@ -31,8 +31,9 @@ public class VehicleAI : MonoBehaviour
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        //Right and left turn
         //Debug.Log(other.tag);
         if (other.CompareTag( "TrafficBox_2"))
         {
@@ -51,6 +52,7 @@ public class VehicleAI : MonoBehaviour
 
         if (other.CompareTag ("TrafficBox_3"))
         {
+            //Right, left turn and straight road
             turnDirection = Random.Range(0, 3);
             if (turnDirection == 1)
             {
@@ -66,6 +68,18 @@ public class VehicleAI : MonoBehaviour
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * speed);
             }
+        }
+
+        //Right turn only
+        if (other.CompareTag ("TrafficBox_4"))
+        {
+            StartCoroutine(SmoothRotateRight(true));
+        }
+
+        //Left turn only
+        if (other.CompareTag ("TrafficBox_5"))
+        {
+            StartCoroutine(SmoothRotateLeft(true));
         }
 
     }
