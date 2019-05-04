@@ -29,7 +29,6 @@ public class VehicleAI : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
-        Debug.Log(turnDirection);
     }
 
     private void OnTriggerExit(Collider other)
@@ -37,7 +36,7 @@ public class VehicleAI : MonoBehaviour
         //Debug.Log(other.tag);
         if (other.CompareTag( "TrafficBox_2"))
         {
-           turnDirection = Random.Range(0, 1);
+           turnDirection = Random.Range(0, 2);
             if (turnDirection == 1)
             {
                 StartCoroutine(SmoothRotateRight(true));
@@ -45,10 +44,30 @@ public class VehicleAI : MonoBehaviour
 
             if (turnDirection == 0)
             {
-                StartCoroutine(SmoothRotateRight(true));
+                StartCoroutine(SmoothRotateLeft(true));
             }
 
         }
+
+        if (other.CompareTag ("TrafficBox_3"))
+        {
+            turnDirection = Random.Range(0, 3);
+            if (turnDirection == 1)
+            {
+                StartCoroutine(SmoothRotateRight(true));
+            }
+
+            if (turnDirection == 0)
+            {
+                StartCoroutine(SmoothRotateLeft(true));
+            }
+
+            if (turnDirection == 2)
+            {
+                transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            }
+        }
+
     }
 
     private IEnumerator SmoothRotateRight(bool isRight)
@@ -63,7 +82,7 @@ public class VehicleAI : MonoBehaviour
 
         while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
-            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotSpeed * 2);
             yield return new WaitForEndOfFrame();
         }
 
