@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+
         currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, Time.deltaTime * acceleration);
         GetComponent<WheelController>().rotationSpeed = speedInput;
 
@@ -23,7 +24,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            speedInput = Mathf.MoveTowards(speedInput, 0, Time.deltaTime);
+            speedInput = Mathf.MoveTowards(speedInput, 0, Time.deltaTime * 20/currentSpeed);
         }
         transform.Translate(Vector3.forward * Time.deltaTime * currentSpeed * speedInput);
 
