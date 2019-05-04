@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
             pointers[i].transform.parent = gameObject.transform;
             pointers[i].GetComponent<FaceTowards>().hospitalTarget = hospitals[i];
         }
+
+        InvokeRepeating("LeaveBlood", 3, .5f);
     }
 
     void Update()
@@ -81,7 +83,22 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Hospital")
         {
+            for (int i = 0; i < hospitals.Length; i++)
+            {
+                if (other.gameObject == hospitals[i])
+                {
+                    pointers[i].SetActive(false);
+                }
+            }
             print("You win");
         }
+    }
+
+    void LeaveBlood()
+    {
+        GameObject idx = Instantiate(blood, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.Euler(90, Random.Range(0, 360), 0));
+        float bloodSize = 1 / bloodLeft;
+        idx.gameObject.transform.localScale = transform.localScale * bloodSize;
+        Destroy(idx, 10);
     }
 }

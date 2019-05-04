@@ -73,12 +73,14 @@ public class VehicleAI : MonoBehaviour
         //Right turn only
         if (other.CompareTag ("TrafficBox_4"))
         {
+            currentRot = transform.rotation.y;
             StartCoroutine(SmoothRotateRight(true));
         }
 
         //Left turn only
         if (other.CompareTag ("TrafficBox_5"))
         {
+            currentRot = transform.rotation.y;
             StartCoroutine(SmoothRotateLeft(true));
         }
 
@@ -92,7 +94,7 @@ public class VehicleAI : MonoBehaviour
         isRotating = true;
 
         var side = isRight ? 1 : -1;
-        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side + 90f, transform.rotation.z);
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side * 90f, transform.rotation.z);
 
         while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
