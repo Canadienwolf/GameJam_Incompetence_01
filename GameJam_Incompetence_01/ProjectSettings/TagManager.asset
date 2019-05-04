@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Right
-  - Left
+  - TrafficBox
+  - Righ/Left_Turn
+  - Right/Left_Turn
   layers:
   - Default
   - TransparentFX
