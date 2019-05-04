@@ -17,11 +17,10 @@ public class WheelController : MonoBehaviour
         frontWheels[0].transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed * 500);
         frontWheels[1].transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed * 500);
 
-        //wheelRot = Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime;
-        //wheelRot = Mathf.Clamp(wheelRot, -15, 15);
+        wheelRot = Mathf.MoveTowards(wheelRot, Input.GetAxis("Horizontal") * 20, Time.deltaTime * 100);
 
-        //frontWheelsTurner[0].transform.rotation = Quaternion.Euler(0, 0, 0);
-        //frontWheelsTurner[1].transform.rotation = Quaternion.Euler(0, 0, 0);
+        frontWheelsTurner[0].transform.localRotation = Quaternion.Euler(0, wheelRot, 0);
+        frontWheelsTurner[1].transform.localRotation = Quaternion.Euler(0, wheelRot, 0);
 
         rearWheels[0].transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed * 500);
         rearWheels[1].transform.Rotate(Vector3.right * Time.deltaTime * rotationSpeed * 500);

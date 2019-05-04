@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        
+    }
+
+    void LateUpdate()
+    {
         print(lives);
         currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, Time.deltaTime * acceleration);
         GetComponent<WheelController>().rotationSpeed = speedInput;
@@ -41,13 +46,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            speedInput = Mathf.MoveTowards(speedInput, 0, Time.deltaTime * 20/currentSpeed);
+            speedInput = Mathf.MoveTowards(speedInput, 0, Time.deltaTime * 20 / currentSpeed);
         }
         transform.Translate(Vector3.forward * Time.deltaTime * currentSpeed * speedInput);
-    }
 
-    void LateUpdate()
-    {
         if (Mathf.Abs(speedInput) > 0.2f)
         {
             currentRot = Input.GetAxis("Horizontal") * rotSpeed * Time.deltaTime * (2 / speedInput) * 10;
