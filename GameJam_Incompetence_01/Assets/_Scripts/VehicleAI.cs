@@ -4,57 +4,34 @@ using UnityEngine;
 
 public class VehicleAI : MonoBehaviour
 {
+    //Speed of the vehicle
+    private float speed = 5f;
 
-    public float movementSpeed = 0.5f;
+    //3 choices of which if statement to take, so that it knows how many directions it can go
+    private int turnDirection;
 
+    //rotation value in the Y axis
+    private float yRot;
 
-    private float currentRot;
-    public float yRot;
-    public int turnDirection = 3;
+    //the current rotation in the y axis that the vehicle currently has in the Y axis
+    public float currentRot;
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
-        currentRot = transform.rotation.y;
+        
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Translate(Vector3.forward * Time.deltaTime * movementSpeed);
-
-        if (turnDirection == 1)
-        {
-            yRot += Time.deltaTime * movementSpeed;
-            transform.rotation = Quaternion.Euler(0, Mathf.MoveTowards(transform.rotation.y, currentRot + 90, yRot), 0);
-        }
-        else if (turnDirection == 0)
-        {
-            yRot += Time.deltaTime * movementSpeed;
-            transform.rotation = Quaternion.Euler(0, Mathf.MoveTowards(transform.rotation.y, currentRot - 90, yRot), 0);
-        }
+        transform.Translate(Vector3.forward * Time.deltaTime * speed);
     }
 
-    private void OnTriggerEnter(Collider collider)
+    private void OnTriggerExit(Collider other)
     {
-        if (collider.gameObject.tag == "TrafficBox")
+        Debug.Log(other.tag);
+        if (other.tag == "TrafficBox_1")
         {
-            //transform.position += Vector3.forward * Time.deltaTime * movementSpeed;
+            transform.rotation = Quaternion.Euler(transform.rotation.y, currentRot + 90, yRot);
         }
-
-        if (collider.gameObject.tag == "Right/Left_Turn")
-        {
-            turnDirection = Random.Range(0, 2);
-            
-        }
-
-        if (GameObject.FindGameObjectWithTag(""))
-        {
-            
-        }
-
     }
 }

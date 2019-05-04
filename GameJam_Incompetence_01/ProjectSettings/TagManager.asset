@@ -4,11 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TrafficBox
-  - Righ/Left_Turn
-  - Right/Left_Turn
   - Ground
   - Hospital
+  - RoadPoint
+  - TrafficBox_1
+  - TrafficBox_2
+  - TrafficBox_3
   layers:
   - Default
   - TransparentFX
