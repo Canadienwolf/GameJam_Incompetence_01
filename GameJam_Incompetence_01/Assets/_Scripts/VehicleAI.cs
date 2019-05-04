@@ -29,20 +29,29 @@ public class VehicleAI : MonoBehaviour
     private void Update()
     {
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        Debug.Log(turnDirection);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log(other.tag);
-        if (other.CompareTag( "TrafficBox_1"))
+        //Debug.Log(other.tag);
+        if (other.CompareTag( "TrafficBox_2"))
         {
-            print(1);
-            StartCoroutine(SmoothRotate(true));
+           turnDirection = Random.Range(0, 1);
+            if (turnDirection == 1)
+            {
+                StartCoroutine(SmoothRotateRight(true));
+            }
+
+            if (turnDirection == 0)
+            {
+                StartCoroutine(SmoothRotateRight(true));
+            }
 
         }
     }
 
-    private IEnumerator SmoothRotate(bool isRight)
+    private IEnumerator SmoothRotateRight(bool isRight)
     {
         if(isRotating)
             yield return null;
@@ -50,7 +59,27 @@ public class VehicleAI : MonoBehaviour
         isRotating = true;
 
         var side = isRight ? 1 : -1;
-        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side*90f, transform.rotation.z);
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side * 90f, transform.rotation.z);
+
+        while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
+        {
+            transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * rotSpeed);
+            yield return new WaitForEndOfFrame();
+        }
+
+        isRotating = false;
+
+    }
+
+    private IEnumerator SmoothRotateLeft(bool isRight)
+    {
+        if (isRotating)
+            yield return null;
+
+        isRotating = true;
+
+        var side = isRight ? 1 : -1;
+        var newRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y + side * -90f, transform.rotation.z);
 
         while (Quaternion.Angle(transform.rotation, newRotation) >= 0.5f)
         {
