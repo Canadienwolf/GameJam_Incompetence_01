@@ -147,6 +147,8 @@ MonoBehaviour:
   lives: 100
   bloodLeft: 100
   blood: {fileID: 7032350945767476531, guid: 94266b97ab144fb4cb91187c81e29cab, type: 3}
+  hospitalPointer: {fileID: 3026181010061101269, guid: 652157a373ff95240b02327bb6ed42b6,
+    type: 3}
   currentRot: 0
 --- !u!114 &8296172669374467361
 MonoBehaviour:
