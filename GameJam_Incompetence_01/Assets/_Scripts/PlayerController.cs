@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        bloodLeft -= Time.deltaTime;
+        bloodLeft -= Time.deltaTime * 2;
 
         if (lives <= 0 || bloodLeft <= 0)
         {
@@ -93,6 +93,12 @@ public class PlayerController : MonoBehaviour
             }
             SceneManager.LoadScene(3, LoadSceneMode.Single);
 
+        }
+
+        if (other.gameObject.tag == "Pickup")
+        {
+            bloodLeft += 10;
+            Destroy(other.gameObject);
         }
     }
 

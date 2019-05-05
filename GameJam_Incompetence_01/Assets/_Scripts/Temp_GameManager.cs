@@ -26,6 +26,7 @@ public class Temp_GameManager : MonoBehaviour
 
         if (Input.GetKeyDown("space"))
         {
+            Time.timeScale = 0;
             SceneManager.LoadScene(2, LoadSceneMode.Additive);
         }
     }
