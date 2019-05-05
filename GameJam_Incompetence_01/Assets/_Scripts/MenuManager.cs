@@ -11,6 +11,7 @@ public class MenuManager : MonoBehaviour
     void Start()
     {
         howToPlay.enabled = false;
+        Cursor.visible = true;
     }
 
     void Update()
@@ -24,6 +25,7 @@ public class MenuManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1, LoadSceneMode.Single);
+        Cursor.visible = false;
     }
 
     public void HowToPlay()

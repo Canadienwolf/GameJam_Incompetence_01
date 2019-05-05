@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < hospitals.Length; i++)
         {
-            pointers.Add(Instantiate(hospitalPointer, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity));
+            pointers.Add(Instantiate(hospitalPointer, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity));
             pointers[i].transform.parent = gameObject.transform;
             pointers[i].GetComponent<FaceTowards>().hospitalTarget = hospitals[i];
         }
@@ -42,7 +43,7 @@ public class PlayerController : MonoBehaviour
 
         if (lives <= 0 || bloodLeft <= 0)
         {
-            print("you lose");
+            SceneManager.LoadScene(4, LoadSceneMode.Single);
         }
     }
 
@@ -90,7 +91,8 @@ public class PlayerController : MonoBehaviour
                     pointers[i].SetActive(false);
                 }
             }
-            print("You win");
+            SceneManager.LoadScene(3, LoadSceneMode.Single);
+
         }
     }
 

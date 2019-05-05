@@ -15,7 +15,7 @@ public class Temp_GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
+        Cursor.visible = false;
     }
 
     // Update is called once per frame
