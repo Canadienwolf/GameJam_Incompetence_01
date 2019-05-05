@@ -14,6 +14,7 @@ public class WinAndPause : MonoBehaviour
     {
         Destroy(GameObject.Find("Scene"));
         Cursor.visible = false;
+        Time.timeScale = 1;
     }
 
     public void Restart()

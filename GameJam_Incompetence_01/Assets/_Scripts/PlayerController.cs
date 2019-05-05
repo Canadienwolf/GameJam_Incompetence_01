@@ -94,6 +94,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene(3, LoadSceneMode.Single);
 
         }
+
+        if (other.gameObject.tag == "Pickup")
+        {
+            bloodLeft += 10;
+            Destroy(other.gameObject);
+        }
     }
 
     void LeaveBlood()

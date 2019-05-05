@@ -13,6 +13,7 @@ TagManager:
   - TrafficBox_4
   - TrafficBox_5
   - Waypoints
+  - Pickup
   layers:
   - Default
   - TransparentFX
