@@ -12,6 +12,7 @@ TagManager:
   - TrafficBox_3
   - TrafficBox_4
   - TrafficBox_5
+  - Waypoints
   layers:
   - Default
   - TransparentFX
