@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
@@ -22,5 +23,10 @@ public class Temp_GameManager : MonoBehaviour
     {
         blood.value = player.GetComponent<PlayerController>().bloodLeft;
         carLife.value = player.GetComponent<PlayerController>().lives;
+
+        if (Input.GetKeyDown("space"))
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Additive);
+        }
     }
 }

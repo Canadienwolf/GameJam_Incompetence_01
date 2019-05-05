@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
             pointers[i].GetComponent<FaceTowards>().hospitalTarget = hospitals[i];
         }
 
-        InvokeRepeating("LeaveBlood", 3, .5f);
+        //InvokeRepeating("LeaveBlood", 3, .5f);
     }
 
     void Update()
@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
     void LeaveBlood()
     {
         GameObject idx = Instantiate(blood, new Vector3(transform.position.x, 0.1f, transform.position.z), Quaternion.Euler(90, Random.Range(0, 360), 0));
-        float bloodSize = 1 / bloodLeft;
+        float bloodSize = 1;
         idx.gameObject.transform.localScale = transform.localScale * bloodSize;
         Destroy(idx, 10);
     }
