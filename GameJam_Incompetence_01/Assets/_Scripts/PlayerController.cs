@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        bloodLeft -= Time.deltaTime;
+        bloodLeft -= Time.deltaTime * 2;
 
         if (lives <= 0 || bloodLeft <= 0)
         {
